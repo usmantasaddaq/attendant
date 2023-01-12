@@ -95,6 +95,7 @@ function App() {
   return (
     <div className="app">
       <div className="login-form">
+        <>
         {isSubmitted ? (
           <div>
             <AuthRoote database={database} />
@@ -102,6 +103,7 @@ function App() {
         ) : (
           renderForm
         )}
+        </>
       </div>
     </div>
   );

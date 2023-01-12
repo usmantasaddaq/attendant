@@ -2,55 +2,13 @@ import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
+
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import moment from "moment/moment";
-import Admin from './Admin'
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
+import Data from "./Data";
 
 function ShowDetail() {
   const [modl, ShowModl] = useState(false);
@@ -60,29 +18,7 @@ function ShowDetail() {
   const [inputText, setInputText] = useState("");
   const [showTimeIN, setshowTimeIN] = useState("");
   const [showTimeOut, setshowTimeOut] = useState("");
-  
-  const data = {
-    people: [
-      {
-        name: "John",
-        date: "11-12-22",
-        timeIn: "6:00PM",
-        timeOut: "3:00AM",
-      },
-      {
-        name: "Ali",
-        date: "11-12-22",
-        timeIn: "6:00PM",
-        timeOut: "3:00AM",
-      },
-      {
-        name: "Ahmed",
-        date: "11-12-22",
-        timeIn: "6:00PM",
-        timeOut: "3:00AM",
-      },
-    ],
-  };
+
   const ShowModelHandler = () => {
     ShowModl(true);
   };
@@ -91,7 +27,7 @@ function ShowDetail() {
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
-  const filteredData = data.people.filter((el) => {
+  const filteredData = Data.people.filter((el) => {
     //if no input the return the original
     if (inputText === "") {
       return el;
@@ -128,9 +64,9 @@ function ShowDetail() {
                 position: "absolute",
                 marginTop: "-19px",
                 paddingLeft: "45px",
-                fontSize:"18px",
-                fontWeight:"bold",
-                color:"skyblue"
+                fontSize: "18px",
+                fontWeight: "bold",
+                color: "skyblue",
               }}
             >
               {" "}
@@ -150,9 +86,9 @@ function ShowDetail() {
                 position: "absolute",
                 paddingLeft: "150px",
                 marginTop: "-19px",
-                fontSize:"18px",
-                fontWeight:"bold",
-                color:"skyblue"
+                fontSize: "18px",
+                fontWeight: "bold",
+                color: "skyblue",
               }}
             >
               {" "}
@@ -226,14 +162,13 @@ function ShowDetail() {
                         <td>{item.timeOut}</td>
                       </tr>
                     ))}
-                  </tbody>
+                  </tbody>  
                 </table>
               </div>
             </div>
           </>
         )}
       </Stack>
-     <Admin data={data} />
     </div>
   );
 }

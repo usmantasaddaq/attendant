@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ShowDetail from "./ShowDetail";
+import Admin from './Admin'
 function AuthRoote({ database }) {
   return (
     <>
@@ -8,8 +9,10 @@ function AuthRoote({ database }) {
         <Routes>
           <Route path="/" element={<ShowDetail />} />
         </Routes>
-      ) : (
-        "Show admin detail"
+      ) : (""
+        // <Routes>
+        // <Route path="/" element={<Admin/>} />
+        // </Routes>
       )}
     </>
   );

@@ -63,14 +63,20 @@
     gap: 8px;
     margin: 10px;
   }
+  table{
+    margin:50%;
+  }
   tr {
     display: flex;
   }
   th,td {
+    width: 3%;
     display: flex;
-    padding: 6px;
+    padding: 0%;
     border: 1px solid #ccc;
-    min-width: 65px;
+    width: 3px;
+    border: 1px solid #ccc;
+    min-width: 153px;
   }
   input[type="text"], input[type="password"] {
     height: 40px;
