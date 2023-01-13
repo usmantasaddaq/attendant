@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import AuthRoote from "./AuthRoote";
 import "./styles.css";
+import LogIn from "./LogIn";
 
 function App() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
+  const [storage, setStorage] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [iserror, setIsError] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const AdminlogInHandler = () => {
+    setAdmin(true);
+  };
+
+
   // User Login info
   const database = [
     {
@@ -18,8 +26,8 @@ function App() {
     {
       userid: "user2",
       pincode: "pass2",
-      IsFlogIn: true,
-      role: "Admin",
+      IsFlogIn: false,
+      role: "admin",
     },
   ];
 
@@ -37,6 +45,7 @@ function App() {
     // Find user login info
     const userData = database.find((user) => user.userid === uname.value);
 
+    setStorage(userData);
     // Compare user info
     if (userData) {
       if (userData.pincode !== pass.value) {
@@ -61,51 +70,60 @@ function App() {
 
   // JSX code for login form
   const renderForm = (
-    <div className="form">
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label style={{ fontWeight: "bold", fontSize: "18px" }}>
-            Employee ID
-          </label>
-          <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
+    <div className="app">
+      <div className="login-form">
+        <div className="form">
+          <form onSubmit={handleSubmit}>
+            <div className="input-container">
+              <label style={{ fontWeight: "bold", fontSize: "18px" }}>
+                Employee ID
+              </label>
+              <input
+                type="text"
+                name="uname"
+                required
+                style={{ height: "2.75em" }}
+              />
+              {renderErrorMessage("uname")}
+            </div>
+            <div className="input-container">
+              <label style={{ fontWeight: "bold", fontSize: "18px" }}>
+                PIN Code
+              </label>
+              <input
+                type="password"
+                name="pass"
+                required
+                style={{ height: "2.75em" }}
+              />
+              {renderErrorMessage("pass")}
+            </div>
+            <div className="button-container">
+              <input type="submit" style={{ height: "2.75em", width: "7em" }} />
+            </div>
+            {iserror && (
+              <>
+                <p style={{ color: "red" }}>
+                  You Enter Invalid Employeeid/Pincode:
+                  <a href="#" onClick={AdminlogInHandler}>
+                    http://Admin/logIn
+                  </a>
+                </p>
+              </>
+            )}
+          </form>
         </div>
-        <div className="input-container">
-          <label style={{ fontWeight: "bold", fontSize: "18px" }}>
-            PIN Code{" "}
-          </label>
-          <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
-        </div>
-        <div className="button-container">
-          <input type="submit" />
-        </div>
-        {iserror && (
-          <>
-            <p style={{ color: "red" }}>
-              You Enter Invalid Employeeid/Pincode:
-              <a href="#">http://Admin/logIn</a>
-            </p>
-          </>
-        )}
-      </form>
+      </div>
     </div>
   );
 
   return (
-    <div className="app">
-      <div className="login-form">
-        <>
-        {isSubmitted ? (
-          <div>
-            <AuthRoote database={database} />
-          </div>
-        ) : (
-          renderForm
-        )}
-        </>
-      </div>
-    </div>
+    <>
+      {!admin && (
+        <>{isSubmitted ? <AuthRoote storage={storage} /> : renderForm}</>
+      )}
+      {admin && <LogIn />}
+    </>
   );
 }
 

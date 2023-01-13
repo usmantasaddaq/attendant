@@ -21,6 +21,7 @@ import Data from "./Data";
 import "./styles.css";
 import Availablity from "./Availablity";
 import OverallStats from "./OverallStats";
+import Setting from "./Setting";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -56,12 +57,12 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
+  const [inputText, setInputText] = useState("");
   const [state, setState] = useState(false);
   const [stats, setstats] = useState(false);
-  const [inputText, setInputText] = useState("");
   const [active, setActive] = useState(false);
   const [actives, setActives] = useState(false);
-
+  const [setting, setStting] = useState(false);
   let inputHandler = (e) => {
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
@@ -85,12 +86,14 @@ export default function BasicTabs() {
     setstats(false);
     setActive(true);
     setActives(false);
+    setStting(false);
   };
   const OverallStat = () => {
     setstats(true);
     setState(false);
     setActives(true);
     setActive(false);
+    setStting(false);
   };
 
   const drawerWidth = 280;
@@ -136,6 +139,13 @@ export default function BasicTabs() {
         </tr>
       </tbody>
     );
+  };
+  const settingHandler = () => {
+    setStting(true);
+    setActive(false);
+    setActives(false);
+    setstats(false);
+    setState(false);
   };
   return (
     <div style={{ display: "flex" }}>
@@ -204,7 +214,9 @@ export default function BasicTabs() {
                     justifyContent: "center",
                     fonSize: "25px",
                     fontWeight: "bold",
+                    backgroundColor: setting ? "#F0F0F0" : "white",
                   }}
+                  onClick={settingHandler}
                 >
                   <ListItemIcon style={{ color: "skyblue" }}>
                     Settings
@@ -330,6 +342,11 @@ export default function BasicTabs() {
       {stats && (
         <div className="containerDashboard">
           <OverallStats />
+        </div>
+      )}
+      {setting && (
+        <div className="containerDashboard">
+          <Setting />
         </div>
       )}
     </div>

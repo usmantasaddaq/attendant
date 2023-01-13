@@ -86,7 +86,6 @@ function Availablity() {
           <h1>Available Employee`s</h1>
         </div>
         <div style={{ paddingLeft: "75px" }}>
-          {" "}
           <TextField
             label="Search.."
             InputProps={{
@@ -109,7 +108,6 @@ function Availablity() {
             <>
               <tr key={i}>
                 <td
-                
                   style={{
                     minWidth: "153px",
                     justifyContent: "center",

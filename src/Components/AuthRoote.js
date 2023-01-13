@@ -1,21 +1,18 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import ShowDetail from "./ShowDetail";
-import Admin from './Admin'
-function AuthRoote({ database }) {
-  return (
-    <>
-      {database[0].role === "user" ? (
-        <Routes>
-          <Route path="/" element={<ShowDetail />} />
-        </Routes>
-      ) : (""
-        // <Routes>
-        // <Route path="/" element={<Admin/>} />
-        // </Routes>
-      )}
-    </>
-  );
+import UserAttendance from "./UserAttendance";
+import Admin from "./Admin";
+function AuthRoote({ storage }) {
+  console.log(storage.role, "dataget");
+
+  const usrData = () => {
+    if (storage.role === "user") {
+      return <UserAttendance />;
+    } else if (storage.role === "admin") {
+      return <Admin />;
+    }
+  };
+
+  return <>{usrData()}</>;
 }
 
 export default AuthRoote;
