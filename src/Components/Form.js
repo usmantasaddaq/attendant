@@ -5,8 +5,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
-function Form() {
+function Form({setEdit}) {
   const SubmitHandler = () => {
+    setEdit(false);
     if (TextField === "") {
       alert("your field is empty");
     } else {

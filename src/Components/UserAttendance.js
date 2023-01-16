@@ -10,7 +10,7 @@ import moment from "moment/moment";
 import Data from "./Data";
 
 function UserAttendance() {
-  const [modl, ShowModl] = useState(false);
+  const [modl, ShowModl] = useState(false); 
   const [disable, setDisable] = useState(false);
   const [disable1, setDisable1] = useState(false);
   const [disable2, setDisable2] = useState(false);

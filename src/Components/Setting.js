@@ -7,7 +7,6 @@ import Tab from "@mui/material/Tab";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Availablity from "./Availablity";
 import Data from "./Data";
 import { useState } from "react";
 import PropTypes from "prop-types";
@@ -43,6 +42,7 @@ TabPanel.propTypes = {
 };
 
 function a11yProps(index) {
+
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
@@ -52,10 +52,12 @@ function Setting() {
   const [value, setValue] = React.useState(0);
   const [inputText, setInputText] = useState("");
   const [edit, setEdit] = useState(false);
-
+  
   const editHandler = () => {
     setEdit(true);
   };
+
+ 
   let inputHandler = (e) => {
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
@@ -75,6 +77,13 @@ function Setting() {
     setValue(newValue);
   };
   const sort = filteredData.sort((a, b) => (a.name > b.name ? 1 : -1));
+  const [data, setData] = useState(sort);
+
+  const handleDelete = (index, e) => (
+  setData(data.filter((v, i) => v.name!==index.name))
+    )
+
+
   const getTable = () => {
     return (
       <tbody>
@@ -148,7 +157,7 @@ function Setting() {
         </Tabs>
       </Box>
       {edit ? (
-        <Form />
+      <Form  setEdit ={setEdit}/>
       ) : (
         <TabPanel value={value} index={0}>
           <div
@@ -178,8 +187,9 @@ function Setting() {
 
           <table>
             {getTable()}
-            {sort.map((item, i) => (
+            {data.map((item, i) => (
               <tr key={i}>
+
                 <td
                   style={{
                     minWidth: "153px",
@@ -213,7 +223,7 @@ function Setting() {
                   }}
                 >
                   <Button>
-                    <DeleteIcon />
+                    <DeleteIcon onClick={(e) => handleDelete(item, i)} />
                   </Button>
                 </td>
               </tr>
@@ -223,7 +233,7 @@ function Setting() {
       )}
 
       <TabPanel value={value} index={1}>
-        <Form />
+    <Form />
       </TabPanel>
     </Box>
   );
